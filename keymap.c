@@ -31,7 +31,7 @@ extern uint8_t is_master;
 // Layer names don't all need to be of the same length, obviously, and you can also skip them
 // entirely and just use numbers.
 enum layer_number {
-    _QWERTY = 0,
+    _EUCALYN = 0,
     _COLEMAK,
     _DVORAK,
     _KEYPAD,
@@ -44,7 +44,7 @@ enum layer_number {
 };
 
 enum custom_keycodes {
-    QWERTY = SAFE_RANGE,
+    EUCALYN = SAFE_RANGE,
     COLEMAK,
     DVORAK,
     KEYPAD,
@@ -68,7 +68,7 @@ enum macro_keycodes {
 #if HELIX_ROWS == 5
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
-    /* Qwerty
+    /* Eucalyn
      * ,-----------------------------------------.             ,-----------------------------------------.
      * | ESC  |   1  |   2  |   3  |   4  |   5  |             |   6  |   7  |   8  |   9  |   0  |  BS  |
      * |------+------+------+------+------+------|             |------+------+------+------+------+------|
@@ -81,7 +81,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * |Lower | Lower| Caps  | GUI  | Alt | Space|  BS  | Enter| Space| Alt  | GUI  | Menu |Lower |Lower |
      * `-------------------------------------------------------------------------------------------------'
      */
-    [_QWERTY] = KEYMAP(
+    [_EUCALYN] = KEYMAP(
         KC_ESC,     KC_1,        KC_2,    KC_3,    KC_4,    KC_5,                                           KC_6,   KC_7,    KC_8,    KC_9,   KC_0,       KC_BSPC,
         KC_TAB,     KC_Q,        KC_W,    KC_E,    KC_R,    KC_T,                                           KC_Y,   KC_U,    KC_I,    KC_O,   KC_P,       KC_BSLS,
         KC_LCTL,    KC_A,        KC_S,    KC_D,    KC_F,    KC_G,                                           KC_H,   KC_J,    KC_K,    KC_L,   KC_SCLN,    KC_RCTL,
@@ -251,7 +251,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * `-------------------------------------------------------------------------------------------------'
      */
     [_ADJUST] =  KEYMAP(
-        XXXXXXX, XXXXXXX, KEYPAD,   DVORAK, COLEMAK,  QWERTY,                   QWERTY,  COLEMAK,  DVORAK,  KEYPAD, XXXXXXX, XXXXXXX,
+        XXXXXXX, XXXXXXX, KEYPAD,  DVORAK,   COLEMAK, EUCALYN,                   EUCALYN, COLEMAK, DVORAK,   KEYPAD, XXXXXXX, XXXXXXX,
         XXXXXXX, RESET,   RGBRST,  RGB_TOG,   AU_ON, AG_SWAP,                   AG_SWAP,   AU_ON, RGB_TOG,  RGBRST, XXXXXXX, XXXXXXX,
         RGB_HUI, RGB_SAI, RGB_VAI, RGB_SMOD,  AU_OFF, AG_NORM,                   AG_NORM,  AU_OFF, RGB_SMOD, RGB_VAI, RGB_SAI, RGB_HUI,
         RGB_HUD, RGB_SAD, RGB_VAD, XXXXXXX, XXXXXXX, XXXXXXX, _______, _______, XXXXXXX, XXXXXXX, XXXXXXX, RGB_VAD, RGB_SAD, RGB_HUD,
@@ -286,7 +286,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 
 #ifdef AUDIO_ENABLE
-    float tone_qwerty[][2]     = SONG(QWERTY_SOUND);
+    float tone_eucalyn[][2]    = SONG(EUCALYN_SOUND);
     float tone_dvorak[][2]     = SONG(DVORAK_SOUND);
     float tone_colemak[][2]    = SONG(COLEMAK_SOUND);
     float tone_plover[][2]     = SONG(PLOVER_SOUND);
@@ -297,7 +297,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 static int current_default_layer;
 
 uint32_t default_layer_state_set_kb(uint32_t state) {
-    // 1<<_QWERTY  - 1 == 1 - 1 == _QWERTY (=0)
+    // 1<<_EUCALYN  - 1 == 1 - 1 == _EUCALYN (=0)
     // 1<<_COLEMAK - 1 == 2 - 1 == _COLEMAK (=1)
     current_default_layer = state - 1;
 
@@ -331,12 +331,12 @@ void update_base_layer(int base) {
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-    case QWERTY:
+    case EUCALYN:
         if (record->event.pressed) {
             #ifdef AUDIO_ENABLE
-            PLAY_SONG(tone_qwerty);
+            PLAY_SONG(tone_eucalyn);
             #endif
-            update_base_layer(_QWERTY);
+            update_base_layer(_EUCALYN);
         }
 
         return false;
@@ -498,7 +498,7 @@ static void render_logo(struct CharacterMatrix *matrix) {
     //matrix_write_P(&matrix, PSTR(" Split keyboard kit"));
 }
 
-static const char Qwerty_name[]  PROGMEM = " Qwerty";
+static const char Eucalyn_name[] PROGMEM = " Eucalyn";
 static const char Colemak_name[] PROGMEM = " Colemak";
 static const char Dvorak_name[]  PROGMEM = " Dvorak";
 static const char Keypad_name[]  PROGMEM = " Keypad";
@@ -511,7 +511,7 @@ static const char Raise_name[]   PROGMEM = ":Extra";
 static const char Adjust_name[]  PROGMEM = ":Adjust";
 
 static const char *layer_names[] = {
-    [_QWERTY] = Qwerty_name,
+    [_EUCALYN] = Eucalyn_name,
     [_COLEMAK] = Colemak_name,
     [_DVORAK] = Dvorak_name,
     [_KEYPAD] = Keypad_name,
