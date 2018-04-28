@@ -239,7 +239,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 
 #ifdef AUDIO_ENABLE
-    float tone_eucalyn[][2]    = SONG(EUCALYN_SOUND);
+    float tone_eucalyn[][2]    = SONG(QWERTY_SOUND);
     float tone_plover[][2]     = SONG(PLOVER_SOUND);
     float tone_plover_gb[][2]  = SONG(PLOVER_GOODBYE_SOUND);
     float music_scale[][2]     = SONG(MUSIC_SCALE_SOUND);
